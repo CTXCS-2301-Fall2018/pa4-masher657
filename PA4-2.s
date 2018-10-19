@@ -16,6 +16,21 @@ main:	PUSH	{LR}
 	@-------------
 	@ Your code goes here.  Put n! in R2
 	@-------------
+    MOV R1, #1
+    MOV R2, R0
+
+loop:
+    SUB R3, R0, R1    @ subtracts R0(n) from R1 and stores in R3
+    ADD R1, R1, #1    @ adds 1 to R1
+    MUL R2, R2, R3    @ multiplies R0 and R3 and stores in R2
+    CMP R0, R1        @compares R0(n) and R1
+    BGT loop
+
+odd:
+    CMP R0, #0
+    MOVEQ R2, #1
+    CMP R0, #1
+    MOVEQ R2, #1
 
 
 
@@ -27,7 +42,7 @@ main:	PUSH	{LR}
 	LDR	R0, =out
 	BL 	printf
 	POP	{PC}
-	
+
 .data
 n:	.word 0
 prompt:	.asciz "Enter n: "
